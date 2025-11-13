@@ -1,6 +1,6 @@
 # Multi-stage Docker build
 # Stage 1: Build da aplicação
-FROM openjdk:17-jdk-alpine as builder
+FROM eclipse-temurin:17-jdk-alpine AS builder
 
 # Define diretório de trabalho
 WORKDIR /app
@@ -16,7 +16,7 @@ RUN apk add --no-cache maven
 RUN mvn clean package -DskipTests
 
 # Stage 2: Runtime da aplicação
-FROM openjdk:17-jre-alpine
+FROM eclipse-temurin:17-jre-alpine
 
 # Define diretório de trabalho
 WORKDIR /app
