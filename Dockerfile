@@ -1,6 +1,6 @@
 # Multi-stage Docker build
 # Stage 1: Build da aplicação
-FROM eclipse-temurin:17-jdk-jammy AS builder
+FROM eclipse-temurin:17-jdk-alpine AS builder
 
 # Define diretório de trabalho
 WORKDIR /app
@@ -9,17 +9,16 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-# Instala Maven
-RUN apt-get update && \
-    apt-get install -y maven && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# Instala Maven usando apk (Alpine Package Manager)
+RUN apk update && \
+    apk add --no-cache maven && \
+    rm -rf /var/cache/apk/*
 
 # Executa o build da aplicação
 RUN mvn clean package -DskipTests
 
 # Stage 2: Runtime da aplicação
-FROM eclipse-temurin:17-jre-jammy
+FROM eclipse-temurin:17-jre-alpine
 
 # Define diretório de trabalho
 WORKDIR /app
