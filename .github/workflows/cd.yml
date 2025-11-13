@@ -21,7 +21,7 @@ jobs:
           cache: maven
       
       - name: Build da aplicacao
-        run: mvn clean package -DskipTests
+        run: mvn clean package -DskipTests -B
       
       - name: Login no Docker Hub
         uses: docker/login-action@v3
