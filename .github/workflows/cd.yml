@@ -1,0 +1,50 @@
+name: 🚀 Continuous Delivery (CD)
+
+on:
+  pull_request:
+    branches: [develop]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+      
+      - name: ☕ Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      
+      - name: 🔧 Build da aplicação
+        run: mvn clean package -DskipTests
+      
+      - name: 🐳 Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: 🏗️ Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: 🚀 Build e Push da imagem Docker
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/gs-4-worklifebalance:latest
+            ${{ secrets.DOCKER_USERNAME }}/gs-4-worklifebalance:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      
+      - name: ✅ Deploy concluído
+        run: |
+          echo "✅ Imagem Docker enviada com sucesso!"
+          echo "🐳 Imagem: ${{ secrets.DOCKER_USERNAME }}/gs-4-worklifebalance:latest"

@@ -1,0 +1,45 @@
+name: 🔨 Continuous Integration (CI)
+
+on:
+  push:
+    branches: 
+      - 'feature/**'
+      - release
+      - hotfix
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+      
+      - name: ☕ Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      
+      - name: 🔧 Build da aplicação
+        run: mvn clean compile
+      
+      - name: 📦 Package da aplicação
+        run: mvn package -DskipTests
+      
+      - name: 🧪 Executar testes
+        run: mvn test
+      
+      - name: 📊 Upload dos artefatos de teste
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: target/surefire-reports/
+      
+      - name: 🐳 Build da imagem Docker (verificação)
+        run: docker build -t gs-4-worklifebalance:ci-check .
+      
+      - name: ✅ Verificação concluída
+        run: echo "✅ CI executado com sucesso!"
