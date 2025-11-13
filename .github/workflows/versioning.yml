@@ -1,4 +1,4 @@
-name: 🏷️ Versionamento Automático
+name: Versionamento Automatico
 
 on:
   push:
@@ -8,15 +8,15 @@ jobs:
   create_tag:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Permissão crítica para criação de tags
+      contents: write
     
     steps:
-      - name: 📥 Checkout do código
+      - name: Checkout do codigo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
       
-      - name: 🏷️ Criar tag automática
+      - name: Criar tag automatica
         uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
