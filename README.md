@@ -1,4 +1,4 @@
-﻿# 🌟 Global Solution - Work-Life Balance API 
+﻿# Global Solution - 2S 
 
 ## 👥 Integrantes do Grupo
 
@@ -189,4 +189,5 @@ Os testes verificam:
 - ✅ Resposta correta do endpoint `/info`
 - ✅ Carregamento correto do contexto da aplicação
 - ✅ Estrutura JSON retornada
+
 
