@@ -1,6 +1,8 @@
 name: Continuous Delivery (CD)
 
 on:
+  push:
+    branches: [develop]
   pull_request:
     branches: [develop]
     types: [opened, synchronize, reopened]
@@ -28,55 +30,17 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-
-      # Adicionado: Necessário para emular ARM64 em runners AMD64
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v3
-        with:
-          platforms: linux/amd64,linux/arm64
-
-      # Primeiro, tenta build multi-platform
-      - name: Build e Push da imagem Docker (Multi-platform)
-        id: multiplatform
-        continue-on-error: true
+      
+      - name: Build e Push da imagem Docker
         uses: docker/build-push-action@v5
         with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          push: true
+          context: . 
+          push: true 
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/gs-4-worklifebalance:latest
             ${{ secrets.DOCKER_USERNAME }}/gs-4-worklifebalance:${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          provenance: false
-
-      # Se multi-platform falhar, faz build apenas para amd64 (Fallback)
-      - name: Build e Push da imagem Docker (AMD64 only)
-        if: steps.multiplatform.outcome == 'failure'
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          platforms: linux/amd64
-          push: true
-          tags: |
-            ${{ secrets.DOCKER_USERNAME }}/gs-4-worklifebalance:latest
-            ${{ secrets.DOCKER_USERNAME }}/gs-4-worklifebalance:${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          provenance: false
-
+          
       - name: Deploy concluido
         run: |
           echo "Imagem Docker enviada com sucesso para o Docker Hub!"
           echo "Imagem: ${{ secrets.DOCKER_USERNAME }}/gs-4-worklifebalance:latest"
-          echo "Tag SHA: ${{ secrets.DOCKER_USERNAME }}/gs-4-worklifebalance:${{ github.sha }}"
-          if [ "${{ steps.multiplatform.outcome }}" == "failure" ]; then
-            echo "⚠️  Build multi-platform falhou, imagem criada apenas para AMD64"
-          else
-            echo "✅ Build multi-platform executado com sucesso"
-          fi
-# Updated  
