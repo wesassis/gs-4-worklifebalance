@@ -31,4 +31,15 @@ class TemaControllerTest {
         mockMvc.perform(get("/info"))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    void deveRetornarStatusDaAplicacao() throws Exception {
+        mockMvc.perform(get("/status"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.status").value("UP"))
+                .andExpect(jsonPath("$.version").value("1.0.0"))
+                .andExpect(jsonPath("$.timestamp").exists())
+                .andExpect(jsonPath("$.message").value("Pipeline CD funcionando corretamente!"));
+    }
 }

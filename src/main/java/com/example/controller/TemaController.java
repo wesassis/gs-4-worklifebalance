@@ -28,4 +28,20 @@ public class TemaController {
         
         return info;
     }
+
+    @GetMapping("/status")
+    @Operation(
+        summary = "Retorna status da aplicação",
+        description = "Endpoint para verificar se a aplicação está funcionando corretamente"
+    )
+    @ApiResponse(responseCode = "200", description = "Status retornado com sucesso")
+    public Map<String, String> getStatus() {
+        Map<String, String> status = new LinkedHashMap<>();
+        status.put("status", "UP");
+        status.put("version", "1.0.0");
+        status.put("timestamp", java.time.LocalDateTime.now().toString());
+        status.put("message", "Pipeline CD funcionando corretamente!");
+        
+        return status;
+    }
 }
