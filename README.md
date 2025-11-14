@@ -99,9 +99,7 @@ Após executar a aplicação, ela estará disponível em: **http://localhost:808
 
 A imagem Docker da aplicação está disponível no Docker Hub:
 
-**🔗 URL da Imagem:** `https://hub.docker.com/r/wesassis/gs-4-worklifebalance`
-
-**🏷️ Tag da Imagem:** `wesassis/gs-4-worklifebalance:latest`
+**🔗 URL da Imagem:** `https://hub.docker.com/r/wassis/gs-4-worklifebalance`
 
 ### Executando a imagem do Docker Hub
 
@@ -188,4 +186,5 @@ Os testes verificam:
 - ✅ Resposta correta do endpoint `/info`
 - ✅ Carregamento correto do contexto da aplicação
 - ✅ Estrutura JSON retornada
+
 
