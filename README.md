@@ -1,4 +1,4 @@
-﻿# Global Solution FIAP 2025 - 2S 
+﻿# Global Solution FIAP 2025 - 2S  
 
 ## 👥 Integrantes do Grupo
 
@@ -189,6 +189,7 @@ Os testes verificam:
 - ✅ Resposta correta do endpoint `/info`
 - ✅ Carregamento correto do contexto da aplicação
 - ✅ Estrutura JSON retornada
+
 
 
 
