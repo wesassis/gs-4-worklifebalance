@@ -1,22 +1,19 @@
-﻿# 🌟 Global Solution - Work-Life Balance API 
+﻿# Global Solution FIAP 2025 - 2S - 3SIR  
 
 ## 👥 Integrantes do Grupo
 
 - **Wesley Assis** - RM 552516
 - **Guilherme Cavalcanti** - RM 98928
 
-## 📋 Descrição do Projeto
+## 📋 Descrição do Tema
 
-Esta API foi desenvolvida para a Global Solution com o tema **"Aplicativos para conciliar vida pessoal e profissional"**. 
+**Tema 4:** Aplicativos para conciliar vida pessoal e profissional
 
-A aplicação é uma API REST simples, construída com **Spring Boot 3**, que fornece informações sobre o tema através de um endpoint único, demonstrando as tecnologias e boas práticas de desenvolvimento que podem ser aplicadas em soluções de work-life balance.
+Esta API foi desenvolvida para a Global Solution com foco em soluções tecnológicas que ajudam pessoas a equilibrarem suas vidas pessoais e profissionais através de aplicações digitais inovadoras.
 
-### 🎯 Finalidade da API
+## 🎯 Finalidade da API
 
-- Fornecer informações estruturadas sobre o tema da Global Solution
-- Demonstrar implementação de API REST com Spring Boot
-- Servir como base para futuras funcionalidades relacionadas a aplicativos de work-life balance
-- Implementar pipeline completo de CI/CD com Docker
+A API fornece informações estruturadas sobre o tema da Global Solution através de um endpoint REST simples, servindo como base para futuras funcionalidades relacionadas a aplicativos de work-life balance e demonstrando boas práticas de desenvolvimento moderno.
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -102,7 +99,9 @@ Após executar a aplicação, ela estará disponível em: **http://localhost:808
 
 A imagem Docker da aplicação está disponível no Docker Hub:
 
-**🔗 URL da Imagem:** `wesassis/gs-4-worklifebalance:latest`
+**🔗 URL da Imagem:** `https://hub.docker.com/r/wesassis/gs-4-worklifebalance`
+
+**🏷️ Tag da Imagem:** `wesassis/gs-4-worklifebalance:latest`
 
 ### Executando a imagem do Docker Hub
 
@@ -189,4 +188,9 @@ Os testes verificam:
 - ✅ Resposta correta do endpoint `/info`
 - ✅ Carregamento correto do contexto da aplicação
 - ✅ Estrutura JSON retornada
+
+
+
+
+
 
